@@ -1,0 +1,9 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	font-family: Museo;
+}
+@font-face {
+    font-family: Museo;
+    src: url(../fonts/MuseoSans_0.otf);
+}

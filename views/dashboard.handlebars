@@ -1,0 +1,70 @@
+<html>
+	<head>
+		<title>Watch Your Worth</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/dashboard.css">
+	</head>
+	<body>
+		<nav>
+			<div id="icon-container">
+				<div id="icon-image"></div>
+			</div>
+			<div id="logout-container">
+				<a id="logout" href="/logout">Log Out</a>
+			</div>
+		</nav>
+		<main>
+			<div id="welcome">
+				<p>Welcome {{username}}!</p>
+			</div>
+			<div id="dashboard-content">
+				<div id="cost-per">
+					<p>Cash flow per minute: <span id="flow" class="green">{{fixed_flow}}</span></p>
+				</div>
+				<div id="financial-information">
+					<p>Total income: ${{incomes}}</p>
+					<p>Total expense: ${{expenses}}</p>
+				</div>
+				<div id="time-information">
+					<p>Date of first input: {{date}}</p>
+					<p>Minutes since first input: {{minutes}}</p>
+				</div>
+			</div>
+			<div id="input-container">	
+				<form method="POST" action="">
+					<select name="transaction_type">
+						<option>Expense</option>
+						<option>Income</option>
+					</select>
+					<input id="value-input" name="value" type="number" step="0.01">
+					<input type="submit" value="Submit" onClick="return empty()">
+				</form>
+			</div>
+		</main>
+
+		<script>
+			// change text to red if flow is <0
+			try {
+				var flow = parseFloat({{flow}});
+				if (flow < 0) {
+					$('#flow').removeClass('green');
+					$('#flow').addClass('red');
+				}
+			} catch(e) {
+			}
+			
+			function empty() {
+			    var input = $("#value-input").val();
+			    // TODO:
+			    // unit test other values that shouldn't be allowed
+			    if (input === "" || input === "0" || input.indexOf("-") !== -1) {
+			    	// TODO:
+			    	// alert the user to enter a value other than using alert
+			        alert("Enter a Valid Roll Number");
+			        return false;
+			    }
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,61 @@
+nav {
+	height: 80px;
+	position: relative;
+	background-color: green;
+	clear: both;
+	display: flex;
+}
+#icon-container {
+	width: 50%;
+	height: 80px;
+	display: flex;
+	justify-content: flex-start;
+}
+#icon-image {
+	height: 70px;
+	margin: 5px 10px;
+	width: 100%;
+	background-image: url('../images/logo-min.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+#homepage-container {
+	height: 100%;
+	width: 50%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	margin-right: 20px;
+}
+#homepage {
+	text-decoration: none;
+	color: black;
+}
+
+#sign-up-content-wrapper {
+	text-align: center;
+	margin-top: 25px;
+}
+#sign-up-content-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	margin: 15px;
+}
+#sign-up-content {
+	margin-right: 10px;
+}
+.sign-up-item {
+	padding: 2.5px;
+}
+
+@media only screen and (max-width: 500px) {
+	nav {
+		height: 100px;
+	}
+	#icon-image {
+		height: 90px;
+		background-image: url('../images/clock.png');
+	}
+}

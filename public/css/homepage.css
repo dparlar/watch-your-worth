@@ -1,0 +1,86 @@
+nav {
+	height: 80px;
+	background-color: green;
+	position: relative;
+	display: flex;
+}
+#icon-container {
+	width: 50%;
+	justify-content: flex-start;
+}
+#icon-image {
+	height: 70px;
+	margin: 5px 10px;
+	box-sizing: border-box;
+	background-image: url('../images/logo-min.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+#login-container {
+	width: 50%;
+}
+#login-form {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+#input-container {
+	height: 50px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-end;
+}
+.user-input {
+	margin-right: 10px;
+}
+#submit-container {
+	height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+#submit-button {
+	margin-right: 10px;
+}
+
+#app-description {
+	text-align: center; 
+	width: 80%;
+	margin: 25px auto;
+	min-width: 320px;
+	font-size: 24px;
+}
+#sign-up {
+	display: block;
+	width: 300px;
+	color: black;
+	text-decoration: none;
+	margin: auto;
+	text-align: center;
+	font-size: 30px;
+	padding: 10px 0px;
+	border: 1px solid black;
+}
+
+@media only screen and (max-width: 500px) {
+	nav {
+		height: 100px;
+	}
+	#icon-image {
+		height: 90px;
+		background-image: url('../images/clock.png');
+	}
+	#login-form {
+		height: 100%;
+		flex-direction: row;
+	}
+	#input-container, #submit-container {
+		height: 100%;
+		flex-direction: column;
+		justify-content: center;
+	}
+	.user-input:first-child {
+		margin-bottom: 5px;
+	}
+}

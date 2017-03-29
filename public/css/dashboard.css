@@ -1,0 +1,79 @@
+nav {
+	height: 80px;
+	position: relative;
+	background-color: green;
+	clear: both;
+	display: flex;
+}
+#icon-container {
+	width: 50%;
+	height: 80px;
+	display: flex;
+	justify-content: flex-start;
+}
+#icon-image {
+	height: 70px;
+	margin: 5px 10px;
+	width: 100%;
+	background-image: url('../images/logo-min.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+#logout-container {
+	height: 100%;
+	width: 50%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	margin-right: 20px;
+}
+#logout {
+	text-decoration: none;
+	color: black;
+}
+main {
+	height: calc(100vh - 80px);
+	position: relative;
+	justify-content: center;
+	margin: 0px 20px;
+}
+#welcome {
+	text-align: center;
+	font-size: 32px;
+	padding: 20px;
+}
+#dashboard-content {
+	text-align: center;
+	padding: 20px;
+}
+#cost-per {
+	font-size: 28px;
+	padding-bottom: 20px;
+}
+.green {
+	color: green;
+}
+.red {
+	color: red;
+}
+#financial-information {
+	font-size: 24px;
+	padding-bottom: 20px;
+}
+#time-information {
+	font-size: 20px;
+}
+#input-container {
+	text-align: center;
+	padding: 20px;
+}
+
+@media only screen and (max-width: 500px) {
+	nav {
+		height: 100px;
+	}
+	#icon-image {
+		height: 90px;
+		background-image: url('../images/clock.png');
+	}
+}
