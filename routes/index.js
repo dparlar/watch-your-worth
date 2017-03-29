@@ -34,6 +34,9 @@ module.exports = function(express, db, passport) {
 		res.render('signup');
 	});
 	index.post('/signup', function(req, res) {
+		// TODO:
+		// salt/encrypt password
+		
 		var username = req.body.username;
 		var password = req.body.password;
 
