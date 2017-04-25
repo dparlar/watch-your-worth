@@ -58,7 +58,7 @@ module.exports = function(express, db, passport, bcrypt) {
 		      		return res.render('signup');		
 	      		}
 
-	      		client.query('INSERT into users VALUES ($1, $2, $3, $4, $5)', [username, hash, new Date().toISOString(), 0, 0], function(err, result) {
+	      		client.query('INSERT into user VALUES ($1, $2, $3, $4, $5)', [username, hash, new Date().toISOString(), 0, 0], function(err, result) {
 		      		release();
 
 		      		if (err) {
@@ -183,7 +183,7 @@ module.exports = function(express, db, passport, bcrypt) {
 		      	}
 
 		      	if (input_type === 'Expense') {
-					client.query('INSERT into expenses VALUES ($1, $2, $3)', [user_name, input_value, new Date().toISOString()], function(err, result) {
+					client.query('INSERT into expense VALUES ($1, $2, $3)', [user_name, input_value, new Date().toISOString()], function(err, result) {
 			      		if (err) {
 			      			// TODO:
 				      		// error handle / log error
@@ -201,7 +201,7 @@ module.exports = function(express, db, passport, bcrypt) {
 			      		var new_expenses = former_expenses + input_value;
 
 			      		if (!req.user.first_entry) {
-			      			client.query('UPDATE users SET expenses = ($1), first_entry = ($2) WHERE user_name = $3', [new_expenses, new Date().toISOString(), user_name], function(err, result) {
+			      			client.query('UPDATE user SET expense = ($1), first_entry = ($2) WHERE user_name = $3', [new_expenses, new Date().toISOString(), user_name], function(err, result) {
 				      			release();
 
 				      			if (err) {
@@ -220,7 +220,7 @@ module.exports = function(express, db, passport, bcrypt) {
 				      			res.redirect('dashboard');
 				      		});
 			      		} else {
-			      			client.query('UPDATE users SET expenses = ($1) WHERE user_name = $2', [new_expenses, user_name], function(err, result) {
+			      			client.query('UPDATE user SET expense = ($1) WHERE user_name = $2', [new_expenses, user_name], function(err, result) {
 				      			release();
 
 				      			if (err) {
@@ -241,7 +241,7 @@ module.exports = function(express, db, passport, bcrypt) {
 			      		}
 			      	});
 				} else if (input_type === 'Income') {
-					client.query('INSERT into incomes VALUES ($1, $2, $3)', [user_name, input_value, new Date().toISOString()], function(err, result) {
+					client.query('INSERT into income VALUES ($1, $2, $3)', [user_name, input_value, new Date().toISOString()], function(err, result) {
 			      		if (err) {
 			      			// TODO:
 				      		// error handle / log error
@@ -259,7 +259,7 @@ module.exports = function(express, db, passport, bcrypt) {
 			      		var new_incomes = former_incomes + input_value;
 
 			      		if (!req.user.first_entry) {
-			      			client.query('UPDATE users SET incomes = ($1), first_entry = ($2) WHERE user_name = $3', [new_incomes, new Date().toISOString(), user_name], function(err, result) {
+			      			client.query('UPDATE user SET income = ($1), first_entry = ($2) WHERE user_name = $3', [new_incomes, new Date().toISOString(), user_name], function(err, result) {
 				      			release();
 
 				      			if (err) {
@@ -278,7 +278,7 @@ module.exports = function(express, db, passport, bcrypt) {
 				      			res.redirect('dashboard');
 				      		});
 			      		} else {
-			      			client.query('UPDATE users SET incomes = ($1) WHERE user_name = $2', [new_incomes, user_name], function(err, result) {
+			      			client.query('UPDATE user SET income = ($1) WHERE user_name = $2', [new_incomes, user_name], function(err, result) {
 				      			release();
 
 				      			if (err) {

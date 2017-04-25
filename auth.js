@@ -8,7 +8,7 @@ module.exports = function(db, bcrypt) {
 		      	if (err) { 
 		      		return done(err);
 		      	}
-		      	client.query('SELECT * FROM users WHERE user_name = ($1)', [username], function(err, result) {
+		      	client.query('SELECT * FROM user WHERE user_name = ($1)', [username], function(err, result) {
 		      		release();
 		      		
 		      		if (err) {
