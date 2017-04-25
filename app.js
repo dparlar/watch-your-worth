@@ -1,11 +1,12 @@
-var express = require('express');
-var session = require('express-session')
-var bodyParser = require('body-parser');
-var exphbs  = require('express-handlebars');
-var favicon = require('serve-favicon');
-var dotenv = require('dotenv');
+const express = require('express');
+const session = require('express-session')
+const bodyParser = require('body-parser');
+const exphbs  = require('express-handlebars');
+const favicon = require('serve-favicon');
+const bcrypt = require('bcrypt');
+const dotenv = require('dotenv');
 dotenv.load();
-var app = express();
+const app = express();
 
 // Configure session
 app.use(session({secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false}));
@@ -24,12 +25,12 @@ app.set('view engine', 'handlebars');
 app.use(favicon(__dirname + '/public/images/clock.ico'));
 
 // Configure passport
-var db = require('./db');
-var passport = require('./auth')(db);
+const db = require('./db');
+const passport = require('./auth')(db, bcrypt);
 app.use(passport.initialize());
 app.use(passport.session());
 
-var index = require('./routes/index')(express, db, passport);
+const index = require('./routes/index')(express, db, passport, bcrypt);
 app.use('/', index);
 
 app.listen('8000');

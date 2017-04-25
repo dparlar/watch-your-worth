@@ -1,5 +1,5 @@
-module.exports = function(express, db, passport) {
-	var index = express.Router();
+module.exports = function(express, db, passport, bcrypt) {
+	const index = express.Router();
 
 	index.get('/', function(req, res) {
 		res.render('homepage');
@@ -49,42 +49,52 @@ module.exports = function(express, db, passport) {
 	      		return res.render('signup');
 	      	}
 
-	      	client.query('INSERT into users VALUES ($1, $2, $3, $4, $5)', [username, password, new Date().toISOString(), 0, 0], function(err, result) {
-	      		release();
-
+	      	bcrypt.hash(password, 10, function(err, hash) {
 	      		if (err) {
 	      			// TODO:
-		      		// error handle / log error
-
-		      		if (err.code == 23505) {
-		      			console.log('duplicate username');
-		      		} else {
-		      			console.log('some other error');
-		      		}
-		      		return res.render('signup');
+	      			// error handle
+		      		console.log('error hashing');
+		      		console.log(JSON.stringify(err));
+		      		return res.render('signup');		
 	      		}
 
-	      		console.log('signup successful');
+	      		client.query('INSERT into users VALUES ($1, $2, $3, $4, $5)', [username, hash, new Date().toISOString(), 0, 0], function(err, result) {
+		      		release();
 
-	      		passport.authenticate('local', function(err, user, message) {
-					if (err) {
-						// TODO:
-						// error handle
-						res.render('signup');
-					} else if (!user) {
-						console.log(message.error);
-				    	res.render('signup');
-				    } else {
-				    	req.logIn(user, function(err) {
-				    		if (err) {
-				    			// TODO:
-								// error handle
-								res.render('signup');
-				    		}
-				    		res.redirect('dashboard');
-				    	});
-				    }
-				})(req, res);
+		      		if (err) {
+		      			// TODO:
+			      		// error handle / log error
+
+			      		if (err.code == 23505) {
+			      			console.log('duplicate username');
+			      		} else {
+			      			console.log('some other error');
+			      		}
+			      		return res.render('signup');
+		      		}
+
+		      		console.log('signup successful');
+
+		      		passport.authenticate('local', function(err, user, message) {
+						if (err) {
+							// TODO:
+							// error handle
+							res.render('signup');
+						} else if (!user) {
+							console.log(message.error);
+					    	res.render('signup');
+					    } else {
+					    	req.logIn(user, function(err) {
+					    		if (err) {
+					    			// TODO:
+									// error handle
+									res.render('signup');
+					    		}
+					    		res.redirect('dashboard');
+					    	});
+					    }
+					})(req, res);
+		      	});
 	      	});
 	    });
 	});

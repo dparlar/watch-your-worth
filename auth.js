@@ -1,4 +1,4 @@
-module.exports = function(db) {
+module.exports = function(db, bcrypt) {
 	var passport = require('passport');
 	var LocalStrategy = require('passport-local').Strategy;
 
@@ -18,10 +18,23 @@ module.exports = function(db) {
 			      	if (!user) {
 			      		return done(null, false, {error: 'Incorrect username.'});
 			      	}
-			      	if (user.password !== password) {
-			        	return done(null, false, {error: 'Incorrect password.'});
-			      	}
-			      	return done(null, user);
+			      	bcrypt.compare(password, user.password, function(err, res) {
+						if (err) {
+					   		// TODO:
+					   		// error handle / log
+					   		console.log('error in bcrypt');
+					  	}
+					  	if (res) {
+							return done(null, user);
+					  	} else {
+					  		return done(null, false, {error: 'Incorrect password.'});
+					  	}
+					});
+
+			      	// if (user.password !== password) {
+			       //  	return done(null, false, {error: 'Incorrect password.'});
+			      	// }
+			      	// return done(null, user);
 			    });
 		    });
 	  	}
