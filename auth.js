@@ -8,7 +8,7 @@ module.exports = function(db, bcrypt) {
 		      	if (err) { 
 		      		return done(err);
 		      	}
-		      	client.query('SELECT * FROM user WHERE user_name = ($1)', [username], function(err, result) {
+		      	client.query('SELECT * FROM wyw_user WHERE user_name = ($1)', [username], function(err, result) {
 		      		release();
 		      		
 		      		if (err) {
@@ -30,11 +30,6 @@ module.exports = function(db, bcrypt) {
 					  		return done(null, false, {error: 'Incorrect password.'});
 					  	}
 					});
-
-			      	// if (user.password !== password) {
-			       //  	return done(null, false, {error: 'Incorrect password.'});
-			      	// }
-			      	// return done(null, user);
 			    });
 		    });
 	  	}
@@ -49,7 +44,7 @@ module.exports = function(db, bcrypt) {
 	      	if (err) { 
 	      		return done(err);
 	      	}
-			client.query('SELECT * FROM users WHERE id = ($1)', [id], function(err, result) {
+			client.query('SELECT * FROM wyw_user WHERE id = ($1)', [id], function(err, result) {
 				release();
 		  		if (err) {
 		  			return done(err);
